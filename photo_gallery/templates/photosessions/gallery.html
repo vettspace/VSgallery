@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h1>Галерея {{ session.title }}</h1>
+    <div class="row">
+        {% for photo in session.photos.all %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <a href="{{ photo.image.url }}" target="_blank">
+                    <img src="{{ photo.image.url }}" class="card-img-top" alt="Фото">
+                </a>
+                <div class="card-body text-center">
+                    <a href="{% url 'download_photo' session.unique_link photo.id %}" class="btn btn-primary">Скачать</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'download_all_photos' session.unique_link %}" class="btn btn-success mt-3">Скачать все фотографии</a>
+</div>
+{% endblock %}
