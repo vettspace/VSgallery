@@ -1,0 +1,166 @@
+body {
+    background-color: #f0f2f5;
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar {
+    background-color: #ffffff !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: #4a4a4a !important;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+.card {
+    border: none;
+    background: transparent;
+    margin-bottom: 1rem;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.image-container {
+    width: 100%;
+    padding-top: 100%; /* Квадратное соотношение сторон */
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px; /* Закругленные углы */
+}
+
+.image-container::before {
+    content: "";
+    display: block;
+    padding-top: 100%; /* По умолчанию квадратное соотношение сторон */
+}
+
+.image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Заполняем контейнер, сохраняя пропорции */
+    border-radius: 10px; /* Закругленные углы */
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto; /* Убираем фиксированную высоту */
+    object-fit: contain; /* Сохраняем пропорции изображения */
+    max-height: 300px; /* Ограничиваем максимальную высоту, если нужно */
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+.btn {
+    border-radius: 25px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.download-all-btn {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    border: 1px solid #6c757d;
+    font-size: 0.9rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.download-all-btn:hover {
+    background-color: #6c757d;
+    color: #ffffff;
+}
+
+.download-btn {
+    background-color: transparent; /* Прозрачный фон */
+    border: none; /* Убираем границу */
+    color: #6c757d; /* Черный цвет иконки */
+    font-size: 1.2rem; /* Размер иконки */
+    padding: 0.25rem; /* Уменьшаем отступы */
+    transition: color 0.3s ease;
+}
+
+.download-btn:hover {
+    color: #333; /* Чуть темнее при наведении */
+}
+
+h1.display-4 {
+    color: #333;
+    font-weight: 300;
+    margin-bottom: 2rem;
+}
+
+/* Стили для Lightbox */
+.lb-data .lb-caption {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px; /* или любая другая фиксированная высота */
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* Стили для Lightbox */
+.lb-outerContainer {
+    background-color: transparent;
+}
+
+.lb-dataContainer {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+}
+
+.lb-data .lb-caption {
+    font-size: 16px;
+    color: #fff;
+}
+
+.lb-data .lb-number {
+    color: #ddd;
+}
+
+
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 768px) {
+    .download-all-btn {
+        position: static;
+        display: inline-block;
+        margin-bottom: 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .col-md-4 {
+        margin-bottom: 1.5rem;
+    }
+}

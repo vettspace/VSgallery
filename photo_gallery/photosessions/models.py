@@ -1,6 +1,5 @@
 """Модели для фотосессий и фотографий"""
 
-import os
 import uuid
 
 from django.db import models

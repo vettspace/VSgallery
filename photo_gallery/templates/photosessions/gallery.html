@@ -1,21 +1,49 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container mt-5">
-    <h1>Галерея {{ session.title }}</h1>
-    <div class="row">
-        {% for photo in session.photos.all %}
-        <div class="col-md-4 mb-3">
-            <div class="card">
-                <a href="{{ photo.image.url }}" target="_blank">
-                    <img src="{{ photo.image.url }}" class="card-img-top" alt="Фото">
+<div class="text-center mb-4">
+    <h1 class="display-4">{{ session.title }}</h1>
+    <a href="{% url 'download_all_photos' session.unique_link %}" class="btn download-all-btn">
+        <i class="fas fa-download mr-1"></i> Скачать все фотографии
+    </a>
+</div>
+<div class="row">
+    {% for photo in session.photos.all %}
+    <div class="col-md-3 mb-4">
+        <div class="card">
+            <div class="image-container">
+                <a href="{{ photo.image.url }}" data-lightbox="gallery" data-title="Фото {{ forloop.counter }}">
+                    <img src="{{ photo.image.url }}" alt="Фото {{ forloop.counter }}">
                 </a>
-                <div class="card-body text-center">
-                    <a href="{% url 'download_photo' session.unique_link photo.id %}" class="btn btn-primary">Скачать</a>
-                </div>
+            </div>
+            <div class="text-center mt-2">
+                <a href="{% url 'download_photo' session.unique_link photo.id %}" class="btn btn-sm download-btn">
+                    <i class="fas fa-download"></i>
+                </a>
             </div>
         </div>
-        {% endfor %}
     </div>
-    <a href="{% url 'download_all_photos' session.unique_link %}" class="btn btn-success mt-3">Скачать все фотографии</a>
+    {% endfor %}
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true,
+        'disableScrolling': true,
+        'fitImagesInViewport': true
+    });
+
+    // Устанавливаем правильное соотношение сторон для каждого изображения
+    document.addEventListener('DOMContentLoaded', function() {
+        const images = document.querySelectorAll('.image-container img');
+        images.forEach(img => {
+            img.onload = function() {
+                const aspectRatio = (this.naturalHeight / this.naturalWidth) * 100;
+                this.closest('.image-container').style.paddingTop = `${aspectRatio}%`;
+            }
+        });
+    });
+</script>
 {% endblock %}
