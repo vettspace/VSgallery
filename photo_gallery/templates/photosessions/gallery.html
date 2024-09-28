@@ -11,14 +11,15 @@
     <div class="col-md-3 mb-4">
         <div class="card">
             <div class="image-container">
+                </a>
                 <a href="{{ photo.image.url }}" data-lightbox="gallery" albumLabel="">
                     <img src="{{ photo.image.url }}">
                 </a>
-            </div>
-            <div class="text-center mt-2">
-                <a href="{% url 'download_photo' session.unique_link photo.id %}" class="btn btn-sm download-btn">
-                    <i class="fas fa-download"></i>
-                </a>
+                <div>
+                    <a href="{% url 'download_photo' session.unique_link photo.id %}" class="btn btn-sm download-btn">
+                        <i class="fas fa-download"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

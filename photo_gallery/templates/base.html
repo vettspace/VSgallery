@@ -18,8 +18,8 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/">VsGallery</a>
         <button class="btn btn-outline-primary ml-auto" id="copyLinkBtn">
-        <i class="fas fa-link"></i> Ссылка
-    </button>
+            <i class="fas fa-link"></i> Ссылка
+        </button>
     </nav>
     <div class="container mt-5">
         {% block content %}
@@ -31,20 +31,29 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Включите JavaScript лайтбокса -->
     <script src="{% static 'lightbox/js/lightbox-plus-jquery.js' %}"></script>
-    {% block extra_js %}
     <script>
         document.getElementById('copyLinkBtn').addEventListener('click', function() {
-            const tempInput = document.createElement('input');
-            tempInput.value = window.location.href;
+            // Получаем текущий домен
+            var currentDomain = window.location.origin;
+            // Создаем ссылку
+            var link = currentDomain + '/gallery/{{ session.unique_link }}';
+            
+            // Создаем временный элемент для копирования
+            var tempInput = document.createElement('input');
+            tempInput.style.position = 'absolute';
+            tempInput.style.left = '-1000px';
+            tempInput.value = link;
             document.body.appendChild(tempInput);
             tempInput.select();
             document.execCommand('copy');
             document.body.removeChild(tempInput);
-    
-            // Сообщение об успешном копировании
-            alert('Ссылка скопирована!');
+
+            // Выводим уведомление о копировании
+            alert('Ссылка на галерею скопирована.');
         });
     </script>
+    {% block extra_js %}
+    
     {% endblock %}
 </body>
 </html>
