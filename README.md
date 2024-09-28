@@ -15,7 +15,7 @@
 1. **Клонируйте репозиторий:**
    ```bash
    git clone https://github.com/vettspace/VSgallery.git
-   cd yatube_api
+   cd photo_gallery
    ```
 
 2. **Создайте и активируйте виртуальное окружение:**
