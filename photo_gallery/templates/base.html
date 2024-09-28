@@ -6,30 +6,45 @@
     <title>{% block title %}VsGallery{% endblock %}</title>
     <!-- Подключение Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Lightbox CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
     <!---Google Fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Ваши стили -->
     {% load static %}
+    <link href="{% static 'lightbox/css/lightbox.css' %}" rel="stylesheet">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/">VsGallery</a>
+        <button class="btn btn-outline-primary ml-auto" id="copyLinkBtn">
+        <i class="fas fa-link"></i> Ссылка
+    </button>
     </nav>
     <div class="container mt-5">
         {% block content %}
         {% endblock %}
     </div>
     <!-- Подключение Bootstrap JS и Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Lightbox JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <!-- Включите JavaScript лайтбокса -->
+    <script src="{% static 'lightbox/js/lightbox-plus-jquery.js' %}"></script>
+    {% block extra_js %}
+    <script>
+        document.getElementById('copyLinkBtn').addEventListener('click', function() {
+            const tempInput = document.createElement('input');
+            tempInput.value = window.location.href;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
     
-    {% block extra_js %}{% endblock %}
+            // Сообщение об успешном копировании
+            alert('Ссылка скопирована!');
+        });
+    </script>
+    {% endblock %}
 </body>
 </html>

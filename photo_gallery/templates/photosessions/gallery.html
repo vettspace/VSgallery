@@ -3,7 +3,7 @@
 <div class="text-center mb-4">
     <h1 class="display-4">{{ session.title }}</h1>
     <a href="{% url 'download_all_photos' session.unique_link %}" class="btn download-all-btn">
-        <i class="fas fa-download mr-1"></i> Скачать все фотографии
+        <i class="fas fa-download mr-1"></i> Скачать фотографии
     </a>
 </div>
 <div class="row">
@@ -11,8 +11,8 @@
     <div class="col-md-3 mb-4">
         <div class="card">
             <div class="image-container">
-                <a href="{{ photo.image.url }}" data-lightbox="gallery" data-title="Фото {{ forloop.counter }}">
-                    <img src="{{ photo.image.url }}" alt="Фото {{ forloop.counter }}">
+                <a href="{{ photo.image.url }}" data-lightbox="gallery" albumLabel="">
+                    <img src="{{ photo.image.url }}">
                 </a>
             </div>
             <div class="text-center mt-2">
@@ -30,9 +30,12 @@
 <script>
     lightbox.option({
         'resizeDuration': 200,
-        'wrapAround': true,
         'disableScrolling': true,
-        'fitImagesInViewport': true
+        'fitImagesInViewport': true,
+        'albumLabel': '', 
+        'alwaysShowNavOnTouchDevices': true,
+        'showImageNumberLabel': false,
+        'wrapAround': true,
     });
 
     // Устанавливаем правильное соотношение сторон для каждого изображения
@@ -46,4 +49,7 @@
         });
     });
 </script>
+
+
+
 {% endblock %}
