@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Подтверждение удаления | VSgallery{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Подтверждение удаления</h2>
+                </div>
+                <div class="card-body">
+                    <p class="text-center">Вы уверены, что хотите удалить галерею "{{ object.title }}"?</p>
+                    <p class="text-center text-muted">Это действие нельзя будет отменить.</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-flex justify-content-center mt-4">
+                            <button type="submit" class="btn btn-danger mr-2">Удалить</button>
+                            <a href="{% url 'gallery_list' %}" class="btn btn-secondary">Отмена</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

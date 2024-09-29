@@ -27,16 +27,11 @@
 
 {% if is_creator %}
 <div class="delete-button-container">
-        <a href="{% url 'delete_gallery' session.unique_link %}" class="btn btn-danger btn-sm" onclick="return confirmDelete();">Удалить</a>
+    <a href="{% url 'delete_gallery' session.unique_link %}" class="btn btn-danger btn-sm">Удалить</a>
 </div>
 {% endif %}
 
 {% endblock %}
 
 {% block extra_js %}
-<script>
-    function confirmDelete() {
-        return confirm("Вы действительно хотите удалить галерею?");
-    }
-</script>
 {% endblock %}

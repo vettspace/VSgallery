@@ -12,14 +12,14 @@
                 <div class="card-body p-4">
                     <h1 class="text-center mb-4">Мои галереи</h1>
                     <ul class="list-group mb-4">
-                        {% for session in page_obj %}
+                        {% for session in sessions %}
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <div>
                                 <a href="{% url 'gallery' session.unique_link %}" class="gallery-link">{{ session.title }}</a>
                                 <p class="gallery-date">{{ session.created_at }}</p>
                             </div>
                             <div>
-                                <a href="{% url 'delete_gallery' session.unique_link %}" class="btn btn-danger btn-sm" onclick="return confirmDelete();">Удалить</a>
+                                <a href="{% url 'delete_gallery' session.unique_link %}" class="btn btn-danger btn-sm">Удалить</a>
                             </div>
                         </li>
                         {% empty %}
@@ -28,6 +28,7 @@
                     </ul>
 
                     <!-- Пагинация -->
+                    {% if is_paginated %}
                     <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-center">
                             {% if page_obj.has_previous %}
@@ -42,7 +43,7 @@
                                 </a>
                             </li>
                             {% endif %}
-                            {% for num in page_obj.paginator.page_range %}
+                            {% for num in paginator.page_range %}
                                 {% if page_obj.number == num %}
                                     <li class="page-item active"><span class="page-link">{{ num }}</span></li>
                                 {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
@@ -56,13 +57,14 @@
                                 </a>
                             </li>
                             <li class="page-item">
-                                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                                <a class="page-link" href="?page={{ paginator.num_pages }}" aria-label="Last">
                                     <span aria-hidden="true">&raquo;&raquo;</span>
                                 </a>
                             </li>
                             {% endif %}
                         </ul>
                     </nav>
+                    {% endif %}
 
                     <a href="{% url 'create_gallery' %}" class="btn btn-info w-100">Создать новую галерею</a>
                 </div>
@@ -71,9 +73,4 @@
     </div>
 </div>
 
-<script>
-function confirmDelete() {
-    return confirm("Вы действительно хотите удалить галерею?");
-}
-</script>
 {% endblock %}

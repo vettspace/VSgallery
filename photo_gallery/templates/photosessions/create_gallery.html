@@ -15,7 +15,7 @@
             <div class="card-body">
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {% for field in session_form %}
+                    {% for field in form %}
                         <div class="form-group">
                             <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                             {{ field|add_class:"form-control" }}
@@ -49,10 +49,9 @@
                     {% endfor %}
                     <div class="form-group">
                         <button type="submit" class="btn btn-info btn-block">Создать галерею</button>
-                        <a href="/">
-                        <button type="button" class="btn btn-cancel btn-block" aria-label="Отмена">Отмена</button>
-                        </a>    
-
+                        <a href="{% url 'gallery_list' %}">
+                            <button type="button" class="btn btn-cancel btn-block" aria-label="Отмена">Отмена</button>
+                        </a>
                     </div>
                 </form>
             </div>
