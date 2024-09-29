@@ -10,13 +10,17 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import PhotoForm, PhotoSessionForm
-from .models import PhotoSession
+from .models import Photo, PhotoSession
 
 
 def gallery_view(request, unique_link):
     """Галерея для клиентов."""
     session = get_object_or_404(PhotoSession, unique_link=unique_link)
-    return render(request, 'photosessions/gallery.html', {'session': session})
+    is_creator = session.client_name == request.user.username
+    return render(
+        request,
+        'photosessions/gallery.html',
+        {'session': session, 'is_creator': is_creator})
 
 
 def download_photo(request, unique_link, photo_id):

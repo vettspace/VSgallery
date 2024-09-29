@@ -15,10 +15,11 @@
                         {% for session in page_obj %}
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <div>
-                                <a href="{% url 'gallery' session.unique_link %}">{{ session.title }}</a>
+                                <a href="{% url 'gallery' session.unique_link %}" class="gallery-link">{{ session.title }}</a>
+                                <p class="gallery-date">{{ session.created_at }}</p>
                             </div>
                             <div>
-                                <a href="{% url 'delete_gallery' session.unique_link %}" class="btn btn-danger btn-sm">Удалить</a>
+                                <a href="{% url 'delete_gallery' session.unique_link %}" class="btn btn-danger btn-sm" onclick="return confirmDelete();">Удалить</a>
                             </div>
                         </li>
                         {% empty %}
@@ -69,4 +70,10 @@
         </div>
     </div>
 </div>
+
+<script>
+function confirmDelete() {
+    return confirm("Вы действительно хотите удалить галерею?");
+}
+</script>
 {% endblock %}

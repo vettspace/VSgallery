@@ -11,7 +11,6 @@
     <div class="col-md-3 mb-4">
         <div class="card">
             <div class="image-container">
-                </a>
                 <a href="{{ photo.image.url }}" data-lightbox="gallery" albumLabel="">
                     <img src="{{ photo.image.url }}">
                 </a>
@@ -25,32 +24,19 @@
     </div>
     {% endfor %}
 </div>
+
+{% if is_creator %}
+<div class="delete-button-container">
+        <a href="{% url 'delete_gallery' session.unique_link %}" class="btn btn-danger btn-sm" onclick="return confirmDelete();">Удалить</a>
+</div>
+{% endif %}
+
 {% endblock %}
 
 {% block extra_js %}
 <script>
-    lightbox.option({
-        'resizeDuration': 200,
-        'disableScrolling': true,
-        'fitImagesInViewport': true,
-        'albumLabel': '', 
-        'alwaysShowNavOnTouchDevices': true,
-        'showImageNumberLabel': false,
-        'wrapAround': true,
-    });
-
-    // Устанавливаем правильное соотношение сторон для каждого изображения
-    document.addEventListener('DOMContentLoaded', function() {
-        const images = document.querySelectorAll('.image-container img');
-        images.forEach(img => {
-            img.onload = function() {
-                const aspectRatio = (this.naturalHeight / this.naturalWidth) * 100;
-                this.closest('.image-container').style.paddingTop = `${aspectRatio}%`;
-            }
-        });
-    });
+    function confirmDelete() {
+        return confirm("Вы действительно хотите удалить галерею?");
+    }
 </script>
-
-
-
 {% endblock %}

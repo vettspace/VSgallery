@@ -6,10 +6,9 @@ from .models import PhotoSession
 class PhotoSessionForm(forms.ModelForm):
     class Meta:
         model = PhotoSession
-        fields = ['title', 'client_name']
+        fields = ['title']
         labels = {
             'title': 'Название',
-            'client_name': 'Имя клиента',
         }
 
 class PhotoForm(forms.Form):

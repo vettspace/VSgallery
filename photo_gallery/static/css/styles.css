@@ -139,6 +139,37 @@ h1.display-4 {
     margin-bottom: 2rem;
 }
 
+.gallery-link {
+    font-size: 1.25rem; /* Увеличенный размер шрифта для названий галерей */
+    font-weight: 500; /* Полужирный шрифт для выделения */
+    color: #007bff; /* Цвет ссылки */
+    text-decoration: none; /* Убираем подчеркивание */
+    transition: color 0.3s ease; /* Плавный переход цвета */
+}
+
+.gallery-link:hover {
+    color: #0056b3; /* Цвет при наведении */
+}
+
+.gallery-date {
+    font-size: 0.875rem; /* Размер шрифта для даты */
+    color: #6c757d; /* Серый цвет для подписи */
+    margin-top: 0.25rem; /* Отступ сверху */
+}
+
+.delete-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9); /* Полупрозрачный фон */
+    z-index: 1000; /* Чтобы кнопка была поверх других элементов */
+}
+
 @media (max-width: 768px) {
     /* На мобильных устройствах горизонтальные фото не увеличиваются */
     .photo-item.landscape {
