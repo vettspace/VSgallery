@@ -1,16 +1,41 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}VSgallery - Главная{% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="row justify-content-center mt-5">
-        <div class="col-md-8 text-center">
-            <h1 class="mb-4">VSgallery</h1>
+        <div class="col-md-6 text-center">
+            <div class="text-center">
+                <img src="{% static 'icons/film_icon.png' %}" class="img-fluid mb-3" alt="Album icon" style="max-width: 90px;">
+            </div>
             <p class="lead mb-4">Добро пожаловать.</p>
-            <a href="/gallery/52f099ff-22d0-4a98-9537-e8cdca680dad/" class="btn btn-primary btn-lg">
-                Тестовая галерея
-            </a>
+            
+            {% if user.is_authenticated %}
+                <h2 class="mb-4">Привет, {{ user.username }}!</h2>
+                <a href="/gallery/52f099ff-22d0-4a98-9537-e8cdca680dad/">
+                    Тестовая галерея
+                </a>
+            {% else %}
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Авторизация</h3>
+                        <form method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" name="username" class="form-control" placeholder="Имя пользователя" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" class="form-control" placeholder="Пароль" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Войти</button>
+                        </form>
+                        <div class="mt-3">
+                            <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-block">Регистрация</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>

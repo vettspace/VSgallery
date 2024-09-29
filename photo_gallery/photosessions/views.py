@@ -1,4 +1,4 @@
-"""Галерея для клиентов."""
+"""Страница просмотра галерей."""
 
 
 import os
@@ -11,19 +11,24 @@ from .models import PhotoSession
 
 
 def gallery_view(request, unique_link):
+    """Галерея для клиентов."""
     session = get_object_or_404(PhotoSession, unique_link=unique_link)
     return render(request, 'photosessions/gallery.html', {'session': session})
 
 
 def download_photo(request, unique_link, photo_id):
+    """Скачать фотографию."""
     session = get_object_or_404(PhotoSession, unique_link=unique_link)
     photo = get_object_or_404(session.photos, id=photo_id)
     response = HttpResponse(photo.image, content_type='image/jpeg')
-    response['Content-Disposition'] = f'attachment; filename="{os.path.basename(photo.image.name)}"'
+    response['Content-Disposition'] = f'attachment; filename="{
+        os.path.basename(photo.image.name)}"'
     return response
 
 
 def download_all_photos(request, unique_link):
+    """Скачать все фотографии в zip-архив."""
+
     session = get_object_or_404(PhotoSession, unique_link=unique_link)
     zip_filename = f"{session.title}_photos.zip"
     response = HttpResponse(content_type='application/zip')

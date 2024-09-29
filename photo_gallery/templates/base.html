@@ -16,10 +16,23 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">VsGallery</a>
-        <button class="btn btn-outline-primary ml-auto" id="copyLinkBtn">
-            <i class="fas fa-link"></i> Ссылка
-        </button>
+        <a class="navbar-brand" href="/"><img src="{% static 'icons/camera_icon.png' %}" class="img-fluid mb-3" alt="Album icon" style="max-width: 20px;"> Vsgallery</a>
+        <div class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <span class="navbar-text mr-3">
+                    {{ user.username }}
+                </span>
+                <a href="{% url 'logout' %}" class="btn btn-outline-secondary">Выйти</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-outline-primary">Войти</a>
+            {% endif %}
+            
+            {% if '/gallery/' in request.path %}
+                <button class="btn btn-outline-primary ml-2" id="copyLinkBtn">
+                    <i class="fas fa-link"></i> Ссылка
+                </button>
+            {% endif %}
+        </div>
     </nav>
     <div class="container mt-5">
         {% block content %}

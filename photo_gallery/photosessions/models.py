@@ -6,10 +6,12 @@ from django.db import models
 
 
 def photo_upload_path(instance, filename):
+    """Путь для загрузки фотографий."""
     return f'photosessions/{instance.session.id}/{filename}'
 
 
 class PhotoSession(models.Model):
+    """Модель для фотосессии."""
     title = models.CharField(max_length=200)
     client_name = models.CharField(max_length=100)
     unique_link = models.UUIDField(
@@ -21,6 +23,7 @@ class PhotoSession(models.Model):
 
 
 class Photo(models.Model):
+    """Модель для фотографий."""
     session = models.ForeignKey(
         PhotoSession, related_name='photos', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=photo_upload_path)
