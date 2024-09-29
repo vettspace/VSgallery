@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DeleteView, DetailView, ListView
 from django.views.generic.edit import FormView
 
-from .forms import PhotoForm, PhotoSessionForm
+from .forms import PhotoSessionForm
 from .models import Photo, PhotoSession
 
 
@@ -66,29 +66,20 @@ class DownloadAllPhotosView(DetailView):
 
 
 class CreateGalleryView(LoginRequiredMixin, FormView):
-    """Создание новой галереи."""
     template_name = 'photosessions/create_gallery.html'
     form_class = PhotoSessionForm
     success_url = reverse_lazy('gallery_list')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['photo_form'] = PhotoForm()
-        return context
-
     def form_valid(self, form):
-        photo_form = PhotoForm(self.request.POST, self.request.FILES)
-        if photo_form.is_valid():
-            photo_session = form.save(commit=False)
-            photo_session.client_name = self.request.user.username
-            photo_session.save()
+        photo_session = form.save(commit=False)
+        photo_session.client_name = self.request.user.username
+        photo_session.save()
 
-            for file in self.request.FILES.getlist('images'):
-                Photo.objects.create(session=photo_session, image=file)
+        files = form.cleaned_data['images']
+        for file in files:
+            Photo.objects.create(session=photo_session, image=file)
 
-            return super().form_valid(form)
-        else:
-            return self.form_invalid(form)
+        return super().form_valid(form)
 
 
 class GalleryListView(LoginRequiredMixin, ListView):
