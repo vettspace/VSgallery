@@ -7,15 +7,32 @@
     <div class="row justify-content-center mt-5">
         <div class="col-md-6 text-center">
             <div class="text-center">
-                <img src="{% static 'icons/film_icon.png' %}" class="img-fluid mb-3" alt="Album icon" style="max-width: 90px;">
+                <h1>VSgallery</h1>
+                <br>
             </div>
-            <p class="lead mb-4">Добро пожаловать.</p>
-            
             {% if user.is_authenticated %}
-                <h2 class="mb-4">Привет, {{ user.username }}!</h2>
-                <a href="/gallery/52f099ff-22d0-4a98-9537-e8cdca680dad/">
-                    Тестовая галерея
-                </a>
+                <p class="mb-4">Привет, {{ user.username }}!</p>
+
+                <div class="container mt-4">
+                    <div class="row justify-content-center">
+                        <div class="col-md-9">
+                            <div class="card shadow">
+                                <div class="card-body p-3">
+                                    <h3 class="card-title text-center mb-4">Управление галереей</h3>
+                                    <div class="d-flex flex-column align-items-center">
+                                        <a href="{% url 'create_gallery' %}" class="btn btn-info">
+                                            <i class="fas fa-plus-circle me-2"></i> Создать галерею
+                                        </a>
+                                        <br>
+                                        <a href="{% url 'gallery_list' %}" class="btn btn-outline-secondary rounded-pill w-100">
+                                            <i class="fas fa-images me-2"></i> Мои галереи
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {% else %}
                 <div class="card">
                     <div class="card-body">
