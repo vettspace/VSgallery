@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}VsGallery{% endblock %}</title>
+    <title>{% block title %}VSgallery{% endblock %}</title>
     <!-- Подключение Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!---Google Fonts-->
@@ -16,7 +16,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/"><img src="{% static 'icons/camera_icon.png' %}" class="img-fluid mb-3" alt="Album icon" style="max-width: 20px;"> Vsgallery</a>
+        <a class="navbar-brand" href="/"><img src="{% static 'icons/camera_icon.png' %}" class="img-fluid mb-3" alt="Album icon" style="max-width: 20px;"> VSgallery</a>
         <div class="navbar-nav ml-auto">
             {% if '/gallery/' in request.path and '/gallery/create/' not in request.path and '/gallery/list/' not in request.path %}
                 <button class="btn btn-outline-primary ml-2" id="copyLinkBtn">
