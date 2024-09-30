@@ -185,6 +185,18 @@ h1.display-4 {
    cursor: pointer;
 }
 
+#preview-area {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+#preview-area img {
+    margin: 5px;
+    object-fit: cover;
+}
+
 .progress {
     height: 30px;
     margin-bottom: 20px;

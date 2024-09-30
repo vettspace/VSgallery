@@ -112,7 +112,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleFiles(files) {
         fileElem.files = files;
         previewFiles(files);
-        document.querySelector('.drop-area-content').style.display = 'none';
+        dropArea.style.display = 'none'; // скрываем область загрузки
+    }
+
+    function showDropAreaIfEmpty() {
+        if (fileElem.files.length === 0) {
+            dropArea.style.display = 'block';
+            document.querySelector('.drop-area-content').style.display = 'block';
+        }
     }
 
     function previewFiles(files) {
@@ -138,7 +145,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     fileElem.addEventListener('change', function() {
-        handleFiles(this.files);
+        if (this.files.length > 0) {
+            handleFiles(this.files);
+        } else {
+            showDropAreaIfEmpty();
+        }
     });
 
     form.addEventListener('submit', function(e) {

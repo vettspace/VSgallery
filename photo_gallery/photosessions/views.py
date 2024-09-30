@@ -1,8 +1,10 @@
+"""Модеи фотосессий."""
+
 import os
 import zipfile
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView, DetailView, ListView
@@ -22,7 +24,9 @@ class GalleryView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['is_creator'] = self.object.client_name == self.request.user.username
+        context['is_creator'] = (
+            self.object.client_name == self.request.user.username
+        )
         return context
 
 
@@ -37,7 +41,7 @@ class DownloadPhotoView(DetailView):
             os.path.basename(photo.image.name)}"'
         return response
 
-    def get_object(self):
+    def get_object(self, queryset=None):
         """Получение объекта фотографии."""
         session = get_object_or_404(
             PhotoSession, unique_link=self.kwargs['unique_link'])
@@ -66,6 +70,7 @@ class DownloadAllPhotosView(DetailView):
 
 
 class CreateGalleryView(LoginRequiredMixin, FormView):
+    """Создание галереи."""
     template_name = 'photosessions/create_gallery.html'
     form_class = PhotoSessionForm
     success_url = reverse_lazy('gallery_list')
@@ -77,7 +82,8 @@ class CreateGalleryView(LoginRequiredMixin, FormView):
 
         files = form.cleaned_data['images']
         for file in files:
-            Photo.objects.create(session=photo_session, image=file)
+            photo = Photo(session=photo_session, image=file)
+            photo.save()
 
         return super().form_valid(form)
 
@@ -90,7 +96,8 @@ class GalleryListView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return PhotoSession.objects.filter(client_name=self.request.user.username)
+        return PhotoSession.objects.filter(
+            client_name=self.request.user.username)
 
 
 class DeleteGalleryView(LoginRequiredMixin, DeleteView):
@@ -101,4 +108,11 @@ class DeleteGalleryView(LoginRequiredMixin, DeleteView):
     slug_url_kwarg = 'unique_link'
 
     def get_queryset(self):
-        return PhotoSession.objects.filter(client_name=self.request.user.username)
+        return PhotoSession.objects.filter(
+            client_name=self.request.user.username)
+
+    def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        success_url = self.get_success_url()
+        obj.delete()
+        return HttpResponseRedirect(success_url)

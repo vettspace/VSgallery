@@ -12,7 +12,7 @@
         <div class="card">
             <div class="image-container">
                 <a href="{{ photo.image.url }}" data-lightbox="gallery" albumLabel="">
-                    <img src="{{ photo.image.url }}">
+                    <img src="{{ photo.thumbnail.url }}" loading="lazy" alt="Thumbnail">
                 </a>
                 <div>
                     <a href="{% url 'download_photo' session.unique_link photo.id %}" class="btn btn-sm download-btn">
