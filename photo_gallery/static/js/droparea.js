@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var dots = document.createElement('span');
 
     const MAX_FILES = 150; // Максимальное количество файлов
-    const MAX_SIZE = 1024 * 1024 * 1024; // 1 ГБ в байтах
+    const MAX_SIZE = (1024 * 1024 * 1024) * 2; // 2 ГБ в байтах
 
     processingMessage.style.textAlign = 'center';
     processingMessage.style.marginTop = '10px';
