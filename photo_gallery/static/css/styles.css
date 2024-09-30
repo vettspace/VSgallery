@@ -221,6 +221,20 @@ h1.display-4 {
     animation: progress-bar-stripes 1s linear infinite;
 }
 
+.gallery-item {
+    transition: background-color 0.3s ease;
+}
+.gallery-item:hover {
+    background-color: #f8f9fa;
+}
+.gallery-title {
+    color: #007bff; /* Синий цвет для заголовков */
+    font-weight: bold;
+}
+.gallery-link:hover .gallery-title {
+    text-decoration: underline;
+}
+
 @keyframes progress-bar-stripes {
     0% { background-position: 40px 0; }
     100% { background-position: 0 0; }

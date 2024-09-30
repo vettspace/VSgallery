@@ -33,27 +33,11 @@
 
                     <!-- Пагинация (оставить без изменений) -->
                     
-                    <a href="{% url 'create_gallery' %}" class="btn btn-info w-100">Создать новую галерею</a>
+                    <a href="{% url 'create_gallery' %}" class="btn btn-info">Создать новую галерею</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<style>
-    .gallery-item {
-        transition: background-color 0.3s ease;
-    }
-    .gallery-item:hover {
-        background-color: #f8f9fa;
-    }
-    .gallery-title {
-        color: #007bff; /* Синий цвет для заголовков */
-        font-weight: bold;
-    }
-    .gallery-link:hover .gallery-title {
-        text-decoration: underline;
-    }
-</style>
 
 {% endblock %}

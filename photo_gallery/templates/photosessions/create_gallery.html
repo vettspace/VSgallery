@@ -10,7 +10,7 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-                <h2 class="text-center">Создание новой галереи</h2>
+                <h2 class="text-center">Новая галерея</h2>
             </div>
             <div class="card-body">
                 <form method="post" enctype="multipart/form-data">
@@ -40,7 +40,7 @@
                                 <i class="fas fa-cloud-upload-alt fa-2x"></i>
                                 <p>Перетащите снимки сюда или кликните для выбора</p>
                             </div>
-                            {{ form.images|attr:"id:fileElem"|attr:"style:display:none;" }}
+                            {{ form.images|attr:"id:fileElem"|attr:"style:display:none;"|attr:"accept:image/jpeg" }}
                         </div>
                         <div id="preview-area" class="mt-3"></div>
                     </div>
@@ -51,12 +51,12 @@
                                 <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
                             </div>
                         </div>
-                    </div>
+                    </div> 
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-info btn-block">Создать галерею</button>
+                        <button type="submit" class="btn btn-info">Создать галерею</button>
                         <a href="{% url 'gallery_list' %}">
-                            <button type="button" class="btn btn-cancel btn-block" aria-label="Отмена">Отмена</button>
+                            <button type="button" class="btn btn-cancel" aria-label="Отмена">Отмена</button>
                         </a>
                     </div>
                 </form>

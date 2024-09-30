@@ -19,7 +19,7 @@
                                     <h3 class="card-title text-center mb-4">Привет, {{ user.username }}!</h3>
                                     <div class="d-flex flex-column align-items-center">
                                         <a href="{% url 'create_gallery' %}" class="btn btn-info">
-                                            <i class="fas fa-plus-circle me-2"></i> Создать галерею
+                                            Новая галерея
                                         </a>
                                         <br>
                                         <a href="{% url 'gallery_list' %}" class="btn btn-outline-secondary rounded-pill w-100">
@@ -34,7 +34,6 @@
             {% else %}
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title mb-4">Авторизация</h3>
                         <form method="post" action="{% url 'login' %}">
                             {% csrf_token %}
                             <div class="form-group">
@@ -43,7 +42,7 @@
                             <div class="form-group">
                                 <input type="password" name="password" class="form-control" placeholder="Пароль" required>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">Войти</button>
+                            <button type="submit" class="btn btn-info btn-block">Войти</button>
                         </form>
                         <div class="mt-3">
                             <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-block">Регистрация</a>

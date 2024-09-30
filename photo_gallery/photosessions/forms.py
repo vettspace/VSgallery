@@ -26,5 +26,5 @@ class PhotoSessionForm(forms.ModelForm):
         model = PhotoSession
         fields = ['title']
         labels = {
-            'title': 'Название',
+            'title': 'Название:',
         }
