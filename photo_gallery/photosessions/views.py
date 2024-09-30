@@ -56,7 +56,7 @@ class DownloadAllPhotosView(DetailView):
 
     def get(self, request, *args, **kwargs):
         session = self.get_object()
-        zip_filename = f"{session.title}_photos.zip"
+        zip_filename = f"{session.unique_link}_photos.zip"
         response = HttpResponse(content_type='application/zip')
         response['Content-Disposition'] = f'attachment; filename={
             zip_filename}'
