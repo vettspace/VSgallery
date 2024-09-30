@@ -30,8 +30,36 @@
                         <li class="list-group-item">У вас нет созданных галерей.</li>
                         {% endfor %}
                     </ul>
+                    
+                    {% if is_paginated %}
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo; Предыдущая</a>
+                                </li>
+                            {% endif %}
 
-                    <!-- Пагинация (оставить без изменений) -->
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                    <li class="page-item active">
+                                        <span class="page-link">{{ num }}</span>
+                                    </li>
+                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая &raquo;</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
                     
                     <a href="{% url 'create_gallery' %}" class="btn btn-info">Создать новую галерею</a>
                 </div>
@@ -39,5 +67,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

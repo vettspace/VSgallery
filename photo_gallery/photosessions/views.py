@@ -97,7 +97,7 @@ class GalleryListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return PhotoSession.objects.filter(
-            client_name=self.request.user.username)
+            client_name=self.request.user.username).order_by('-created_at')
 
 
 class DeleteGalleryView(LoginRequiredMixin, DeleteView):
