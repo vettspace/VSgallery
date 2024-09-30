@@ -241,10 +241,63 @@ h1.display-4 {
 }
 .gallery-title {
     color: #007bff; /* Синий цвет для заголовков */
-    font-weight: bold;
+    text-decoration: none;
+    font-weight: regular;
+    transition: color 0.3s ease;
 }
+
 .gallery-link:hover .gallery-title {
     text-decoration: underline;
+}
+
+.gallery-title:hover {
+    color: darken(var(--primary-color), 10%); /* Более темный оттенок при наведении */
+}
+
+.pagination .page-link {
+    color: #007bff; /* Тот же цвет, что и у заголовка */
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+.pagination .page-link:hover {
+    color: #0056b3;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+/* Стили для кнопки "Создать новую галерею" */
+.create-gallery-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.create-gallery-btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 33px;
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    transition: all 0.15s ease-in-out;
+}
+
+.create-gallery-btn:hover {
+    color: #fff;
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+.container {
+    margin-bottom: 3rem; 
 }
 
 @keyframes progress-bar-stripes {

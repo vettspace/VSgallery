@@ -6,47 +6,38 @@
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-6 text-center">
-            <div class="text-center">
-                <h1>VSgallery</h1>
-                <br>
-            </div>
+            <h1 class="display-4 mb-4">VSgallery</h1>
+            
             {% if user.is_authenticated %}
-                <div class="container mt-4">
-                    <div class="row justify-content-center">
-                        <div class="col-md-9">
-                            <div class="card shadow">
-                                <div class="card-body p-3">
-                                    <h3 class="card-title text-center mb-4">Привет, {{ user.username }}!</h3>
-                                    <div class="d-flex flex-column align-items-center">
-                                        <a href="{% url 'create_gallery' %}" class="btn btn-info">
-                                            Новая галерея
-                                        </a>
-                                        <br>
-                                        <a href="{% url 'gallery_list' %}" class="btn btn-outline-secondary rounded-pill w-100">
-                                            <i class="fas fa-images me-2"></i> Мои галереи
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="card shadow">
+                    <div class="card-body p-4">
+                        <h3 class="card-title mb-4">Привет, {{ user.username }}!</h3>
+                        <div class="d-grid gap-3">
+                            <a href="{% url 'create_gallery' %}" class="btn btn-info btn-lg">
+                                <i class="fas fa-plus-circle me-2 text-white"></i> Новая галерея
+                            </a>
+                            <a href="{% url 'gallery_list' %}" class="btn btn-outline-secondary btn-lg">
+                                <i class="btn-info me-2"></i> Мои галереи
+                            </a>
                         </div>
                     </div>
                 </div>
             {% else %}
-                <div class="card">
-                    <div class="card-body">
+                <div class="card shadow">
+                    <div class="card-body p-4">
                         <form method="post" action="{% url 'login' %}">
                             {% csrf_token %}
-                            <div class="form-group">
-                                <input type="text" name="username" class="form-control" placeholder="Имя пользователя" required>
+                            <div class="mb-3">
+                                <input type="text" name="username" class="form-control form-control-lg" placeholder="Имя пользователя" required>
                             </div>
-                            <div class="form-group">
-                                <input type="password" name="password" class="form-control" placeholder="Пароль" required>
+                            <div class="mb-3">
+                                <input type="password" name="password" class="form-control form-control-lg" placeholder="Пароль" required>
                             </div>
-                            <button type="submit" class="btn btn-info btn-block">Войти</button>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-info btn-lg">Войти</button>
+                                <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-lg">Регистрация</a>
+                            </div>
                         </form>
-                        <div class="mt-3">
-                            <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-block">Регистрация</a>
-                        </div>
                     </div>
                 </div>
             {% endif %}
