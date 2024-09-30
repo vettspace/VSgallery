@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Доступ запрещен | 403{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1 class="display-4">403</h1>
+    <h1 class="display-4">Доступ запрещен</h1>
+    <p class="lead">У вас нет разрешения на доступ к этой странице.</p>
+    <a href="/" class="btn btn-primary mt-3">Вернуться на главную</a>
+</div>
+{% endblock %}

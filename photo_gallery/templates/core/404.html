@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Страница не найдена | 404{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1 class="display-4">404</h1>
+    <h1 class="display-4">Упс! Страница не найдена</h1>
+    <p class="lead">Извините, но страницы с адресом <code>{{ request.path }}</code> не существует.</p>
+    <a href="/" class="btn btn-primary mt-3">Вернуться на главную</a>
+</div>
+{% endblock %}

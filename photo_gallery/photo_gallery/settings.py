@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-zd6wl3m96cb*rjyo#6eap62t%%b1-m$^)l^*vokqh2vc$x+1tg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -129,6 +132,8 @@ STATICFILES_DIRS = [
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

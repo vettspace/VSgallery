@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Внутренняя ошибка сервера | 500{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1 class="display-4">500</h1>
+    <h1 class="display-4">Что-то пошло не так</h1>
+    <p class="lead">Извините, но на сервере произошла внутренняя ошибка.</p>
+    <p>Наша команда уже работает над устранением проблемы.</p>
+    <a href="/" class="btn btn-primary mt-3">Попробовать снова</a>
+</div>
+{% endblock %}
