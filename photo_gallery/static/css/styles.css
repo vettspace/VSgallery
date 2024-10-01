@@ -310,6 +310,12 @@ h1.display-4 {
     margin-bottom: 3rem; 
 }
 
+#loadingMessage {
+    
+    margin: 0 auto;
+    
+}
+
 @keyframes progress-bar-stripes {
     0% { background-position: 40px 0; }
     100% { background-position: 0 0; }

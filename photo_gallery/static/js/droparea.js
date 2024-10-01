@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         xhr.upload.onload = function() {
-            processingMessage.innerHTML = '<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><br>Почти готово! 🚀 <br> Обрабатываем данные...<br><hr>';
+            processingMessage.innerHTML = '<div class="alert alert-warning  align-items-center" role="alert"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><br>Почти готово! 🚀 <br> Обрабатываем данные...<br></div>';
             processingMessage.appendChild(dots);
             progressBarContainer.after(processingMessage);
         };

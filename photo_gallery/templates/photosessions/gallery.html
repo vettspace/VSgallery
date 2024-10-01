@@ -1,10 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
 <div class="text-center mb-4">
     <h1 class="display-4">{{ session.title }}</h1>
-    <a href="{% url 'download_all_photos' session.unique_link %}" class="btn download-all-btn">
-        <i class="fas fa-download mr-1"></i> Скачать все фотографии
+    <a href="{% url 'download_all_photos' session.unique_link %}" class="btn btn-primary btn-lg download-all-btn" id="downloadAllBtn">
+        <i class="fas fa-download mr-2"></i> Скачать все фотографии
     </a>
+    <div id="loadingMessage" class="mt-4" style="display: none;">
+        <div class="alert alert-warning  align-items-center" role="alert">
+            <h4 class="alert-heading"><i class="spinner-border"></i> Подготовка архива</h4>
+            <p class="mb-0">Пожалуйста, подождите. Формируем архив с фотографиями.</p>
+        </div>
+        <div class="progress mt-3" style="height: 20px;">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+        </div>
+    </div>
 </div>
 <div class="row">
     {% for photo in session.photos.all %}
@@ -31,7 +41,9 @@
 </div>
 {% endif %}
 
+<script src="{% static 'js/msg-download-all.js'%}"></script>
 {% endblock %}
 
 {% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {% endblock %}
