@@ -62,11 +62,11 @@ class Photo(models.Model):
     def save(self, *args, **kwargs):
         if not self.thumbnail:
             img = Image.open(self.image)
-            max_size = (1200, 800)
+            max_size = (800, 800)
             img.thumbnail(max_size, Image.LANCZOS)
             thumb_io = BytesIO()
 
-            img.save(thumb_io, format='PNG', quality=100)
+            img.save(thumb_io, format='PNG', quality=90)
             thumb_filename = f"thumb_{os.path.splitext(
                 os.path.basename(self.image.name))[0]}.png"
 
