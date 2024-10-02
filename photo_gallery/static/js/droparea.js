@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var progressBarContainer = document.getElementById('progress-bar-container');
     var processingMessage = document.createElement('div');
     var dots = document.createElement('span');
+    var submitButton = document.querySelector('button[type="submit"]');
 
     const MAX_FILES = 150; // Максимальное количество файлов
     const MAX_SIZE = (1024 * 1024 * 1024) * 2; // 2 ГБ в байтах
@@ -68,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (totalSize > MAX_SIZE) {
-            alert(`Общий размер файлов не должен превышать 1 ГБ. Текущий размер: ${formatSize(totalSize)}`);
+            alert(`Общий размер файлов не должен превышать 2 ГБ. Текущий размер: ${formatSize(totalSize)}`);
             return;
         }
 
@@ -119,21 +120,43 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         var formData = new FormData(form);
         
+        // Скрываем кнопку отправки
+        submitButton.style.display = 'none';
+        
         var xhr = new XMLHttpRequest();
         xhr.open('POST', form.action, true);
         
+        // Показываем прогресс-бар
+        progressBarContainer.style.display = 'block';
+        
+        // Переменные для отслеживания прогресса
+        var lastPercentage = 0;
+        var lastUpdate = Date.now();
+        
         xhr.upload.onprogress = function(e) {
             if (e.lengthComputable) {
-                var percentComplete = (e.loaded / e.total) * 100;
-                progressBar.style.width = percentComplete + '%';
-                progressBar.textContent = percentComplete.toFixed(2) + '%';
-                progressBar.setAttribute('aria-valuenow', percentComplete);
-                progressBarContainer.style.display = 'block';
+                var now = Date.now();
+                var percentComplete = Math.round((e.loaded / e.total) * 100);
+                
+                // Обновляем прогресс-бар не чаще, чем раз в 100 мс и если процент изменился
+                if (now - lastUpdate > 100 && percentComplete !== lastPercentage) {
+                    progressBar.style.width = percentComplete + '%';
+                    progressBar.textContent = percentComplete + '%';
+                    progressBar.setAttribute('aria-valuenow', percentComplete);
+                    
+                    lastPercentage = percentComplete;
+                    lastUpdate = now;
+                }
             }
         };
 
         xhr.upload.onload = function() {
-            processingMessage.innerHTML = '<div class="alert alert-warning  align-items-center" role="alert"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><br>Почти готово! 🚀 <br> Обрабатываем данные...<br></div>';
+            // Устанавливаем прогресс-бар в 100% по завершении загрузки
+            progressBar.style.width = '100%';
+            progressBar.textContent = '100%';
+            progressBar.setAttribute('aria-valuenow', 100);
+            
+            processingMessage.innerHTML = '<div class="alert alert-warning align-items-center" role="alert"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><br>Почти готово! 🚀 <br> Обрабатываем данные...<br></div>';
             processingMessage.appendChild(dots);
             progressBarContainer.after(processingMessage);
         };
@@ -145,11 +168,15 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 // Обработка ошибок
                 alert('Произошла ошибка при загрузке.');
+                // Показываем кнопку отправки снова
+                submitButton.style.display = 'inline-block';
             }
         };
         
         xhr.onerror = function() {
             alert('Произошла ошибка при загрузке.');
+            // Показываем кнопку отправки снова
+            submitButton.style.display = 'inline-block';
         };
         
         xhr.send(formData);
